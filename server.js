@@ -7,7 +7,7 @@ var d = new Date();
 
 app.get('*',function(req, res, next) {
 var keyword = req.originalUrl.slice(1,req.originalUrl.length);
-mongodb.MongoClient.connect('mongodb://mongodb:fcc007@ds033966.mlab.com:33966/szantog82', function(err,db) {
+mongodb.MongoClient.connect('mongodb:/', function(err,db) {
   if (err) throw err;
   var imgsearch = db.collection('imgsearch');
   imgsearch.count({}, function(err, count) {
