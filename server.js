@@ -2,22 +2,26 @@ var express = require('express');
 var app = express();
 var id;
 var mongodb = require('mongodb');
+var d = new Date();
 
 
-app.use('',function(req, res, next) {
-var url = req.originalUrl.slice(1,req.originalUrl.length);
-mongodb.MongoClient.connect('url', function(err,db) {
-  if (err) console.log(err);
+app.get('*',function(req, res, next) {
+var keyword = req.originalUrl.slice(1,req.originalUrl.length);
+mongodb.MongoClient.connect('mongodb://mongodb:fcc007@ds033966.mlab.com:33966/szantog82', function(err,db) {
+  if (err) throw err;
   var imgsearch = db.collection('imgsearch');
-  
-  //id = parseInt(imgsearch.count()) + 1;
- // app.json(imgsearch.count())
-  /*imgsearch.insert({
-    _id: id,
-    url: url
-  })*/
-  app.("finish");
-  db.close();
+  imgsearch.count({}, function(err, count) {
+        if (err) throw err;
+        console.log(count);
+        id = count + 1;
+        imgsearch.insert({
+            _id: id,
+            keyword: keyword,
+            date: d.toLocaleDateString() + " " + d.toLocaleTimeString()
+            })
+        db.close();
+  })
+  res.end();
   next();
 })
 
