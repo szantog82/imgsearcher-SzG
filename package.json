@@ -1,0 +1,23 @@
+{
+  "name": "http-server",
+	"version": "0.0.2",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"express": "^4.12.4",
+		"mongodb": "*",
+    "request": "*"
+	},
+	"engines": {
+		"node": "4.4.3"
+	},
+	"repository": {
+		"type": "git"
+	},
+	"keywords": [
+		"node"
+	],
+		"license": ""
+}
